@@ -15,6 +15,7 @@ pool = redis.ConnectionPool(host=redis_host, port=redis_port)
 r = redis.Redis(connection_pool=pool)
 
 try:
+    r.xadd("mystream",  {'event_type': 'startup', 'user': 'root'})
     r.xgroup_create("mystream", "consumerGroup", '$')
 except:
     print("group already exists")
