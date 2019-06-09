@@ -8,3 +8,26 @@ services:
     image: "maguec/streams2ts"
     links:
       - "redis:redis"
+  datastore:
+    image: "maguec/grafanadatastoreserver"
+    links:
+      - "redis:redis"
+    ports:
+      - "8080:8080"
+  grafana:
+    image: "grafana/grafana"
+    volumes:
+      #- ./grafana.db:/var/lib/grafana/grafana.db 
+      - ./grafana-data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-simple-json-datasource
+      - GF_SECURITY_ADMIN_PASSWORD=1234
+    links:
+      - "datastore:datastore"
+
+volumes:                                                                         
+  .:                                                                             
+    driver_opts:                                                                 
+      o: uid=472,gid=472
