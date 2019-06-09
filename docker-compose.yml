@@ -1,0 +1,10 @@
+version: '3'
+services:
+  redis:
+    image: "redislabs/redistimeseries"
+    ports:
+      - "6379:6379"
+  runner:
+    image: "maguec/streams2ts"
+    links:
+      - "redis:redis"
