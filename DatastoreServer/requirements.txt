@@ -5,5 +5,5 @@ rmtest>=0.2
 six>=1.10.0
 gevent==1.2.1
 Flask>=0.12
-Flask-Cors==3.0.2
+Flask-Cors==3.0.9
 python-dateutil==2.6.0
